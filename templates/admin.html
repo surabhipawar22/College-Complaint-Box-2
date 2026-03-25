@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Complaint Box</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow admin-glow" aria-hidden="true"></div>
+
+  <!-- ── LOGIN OVERLAY ──────────────────────────────────────────────────── -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Admin <strong>Login</strong></span>
+      </div>
+      <p class="login-sub">Restricted area — authorised personnel only.</p>
+
+      <div class="form-group">
+        <label for="loginUser">Username</label>
+        <input type="text" id="loginUser" placeholder="admin" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Password</label>
+        <div class="pass-wrap">
+          <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" />
+          <button class="pass-toggle" id="passToggle" type="button" aria-label="Show password">👁</button>
+        </div>
+      </div>
+      <button class="btn btn-primary full-width" id="loginBtn">
+        <span class="btn-text">Sign In</span>
+        <span class="btn-loader" aria-hidden="true"></span>
+      </button>
+      <p class="login-error" id="loginError"></p>
+      <a href="/" class="back-link">← Back to Complaint Form</a>
+    </div>
+  </div>
+
+  <!-- ── ADMIN DASHBOARD ────────────────────────────────────────────────── -->
+  <div class="admin-shell" id="adminShell" style="display:none;">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Complaint<strong>Box</strong></span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-filter="">All Complaints</a>
+        <a href="#" class="nav-item" data-filter="pending">Pending</a>
+        <a href="#" class="nav-item" data-filter="resolved">Resolved</a>
+      </nav>
+
+      <div class="sidebar-section-label">By Department</div>
+      <nav class="sidebar-nav dept-nav" id="deptNav"></nav>
+
+      <div class="sidebar-bottom">
+        <button class="btn btn-ghost btn-sm full-width" id="logoutBtn">Sign Out</button>
+        <a href="/" class="btn btn-ghost btn-sm full-width" style="margin-top:6px;">← Student Form</a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="admin-main">
+
+      <!-- Top bar -->
+      <header class="admin-header">
+        <div>
+          <h1 class="admin-title" id="panelTitle">All Complaints</h1>
+          <p class="admin-subtitle" id="panelCount">Loading…</p>
+        </div>
+        <button class="btn btn-primary btn-sm" id="refreshBtn">↺ Refresh</button>
+      </header>
+
+      <!-- Stats row -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+          <span class="stat-num" id="statTotal">—</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num pending-col" id="statPending">—</span>
+          <span class="stat-label">Pending</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num resolved-col" id="statResolved">—</span>
+          <span class="stat-label">Resolved</span>
+        </div>
+      </div>
+
+      <!-- Complaints list -->
+      <div class="complaints-list" id="complaintsList">
+        <div class="loading-state">Loading complaints…</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Detail modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card" id="modalCard" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast toast-success" id="successToast" role="alert" aria-live="polite"></div>
+  <div class="toast toast-error"   id="errorToast"   role="alert" aria-live="assertive"></div>
+
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>
